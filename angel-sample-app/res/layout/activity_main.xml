@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".MainActivity" >
+
+     <View
+        android:id="@+id/sepTitle"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ffff00" /> 
+        
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_below="@id/sepTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#000000" >
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+           android:fontFamily="sans-serif"
+           android:gravity="center_horizontal"
+           android:text="@string/app_name"
+           android:textColor="#ffff00"
+           android:textSize="18sp"
+           android:textStyle="bold" />
+
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/sepDevieName"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/title"
+        android:background="#ffffff" />
+        
+    <RelativeLayout
+        android:id="@+id/heartRateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/sepDevieName"
+        android:background="#f5f5f5" >
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:layout_centerVertical="true"
+           android:layout_marginLeft="@dimen/activity_horizontal_margin"
+           android:text="@string/heart_rate"
+           android:textColor="#888888"
+           android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/heartRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="#888888"
+            android:textSize="44sp" />      
+    </RelativeLayout>
+    <View
+        android:id="@+id/sepHeartRate"
+        android:layout_width="match_parent"
+        android:layout_below="@id/heartRateLayout"
+        android:layout_height="2dp"
+        android:background="#ffffff" />
+    
+   <RelativeLayout
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"> 
+        
+    <View
+        android:id="@+id/sepControl"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#00a7ff" /> 
+
+    <TextView
+        android:id="@+id/controlAction"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="right|center_vertical"
+        android:gravity="center_horizontal"
+        android:text="@string/scan"
+        android:textColor="#00a7ff"
+        android:textSize="22sp" />
+    <View
+        android:id="@+id/sepControlBottom"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="2dp"
+        android:background="#00a7ff" />
+    
+    
+    </RelativeLayout>    
+</RelativeLayout>
