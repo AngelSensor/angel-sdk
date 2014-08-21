@@ -1,30 +1,642 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml" />
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Angel Sensor BLE Services - Preview</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 21 Aug 2014 19:34:31 +0300</pubDate>
+    <lastBuildDate>Thu, 21 Aug 2014 19:34:31 +0300</lastBuildDate>
+    <generator>Jekyll v2.3.0</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve --watch&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 21 Aug 2014 00:47:34 +0300</pubDate>
+        <link>http://yourdomain.com/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Bloodoxygensaturationservice</title>
+        <description>&lt;h1 id=&quot;blood-oxygen-saturation-service&quot;&gt;Blood Oxygen Saturation Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;902dcf38-ccc0-4902-b22c-70cab5ee5df2&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Blood Oxygen Saturation&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;blood-oxygen-saturation-measurement-characteristic&quot;&gt;Blood Oxygen Saturation Measurement Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;b269c33f-df6b-4c32-801d-1b963190bc71&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Blood Oxygen Saturation Value&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;FLOAT&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Units: &lt;a href=&quot;https://developer.bluetooth.org/gatt/units/Pages/default.aspx&quot;&gt;percentage&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Time Stamp&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;body-sensor-location-characteristic&quot;&gt;Body Sensor Location Characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;0x2A38&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml&quot;&gt;org.bluetooth.characteristic.body_sensor_location&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;TODO:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Consider making time stamp optional similar to Health Thermometer. &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 20 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/BloodOxygenSaturationService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/BloodOxygenSaturationService.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Alarmclockservice</title>
+        <description>&lt;h1 id=&quot;alarm-clock-service&quot;&gt;Alarm Clock Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;7cd50edd-8bab-44ff-a8e8-82e19393af10&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date Time&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Clock Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;date-time-characteristic&quot;&gt;Date Time Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;2A08&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Represents the current Date and Time as reported by the device clock. This characteristic follows the &lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt; specification. &lt;/p&gt;
+
+&lt;h2 id=&quot;alarm-clock-control-point&quot;&gt;Alarm Clock Control Point&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;e4616b0c-22d5-11e4-a7bf-b2227cce2b54&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operator&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operand&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-op-codes&quot;&gt;Alarm Clock Control Point Op Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;opcodes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+      &lt;th&gt;Operator&lt;/th&gt;
+      &lt;th&gt;Operand&lt;/th&gt;
+      &lt;th&gt;Response Value&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Report maximum supported alarms&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Report number of alarms defined&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Read alarm&lt;/td&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Add alarm&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Alarm Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Remove alarm&lt;/td&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;Remove all alarms&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;Set system Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;System Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Each write to this Control Point shall contain an Op Code and optionally one or both the Operator and the Operand.&lt;/p&gt;
+
+&lt;p&gt;For example, Add Alarm is sent as follows: [Op Code=3] [Operand=date_time]. This operation does not require an operator, so the op code is followed immediately by the operand.&lt;/p&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-response-format&quot;&gt;Alarm Clock Control Point Response Format&lt;/h3&gt;
+&lt;p&gt;Each response follows the next format:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Response Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#response_codes&quot;&gt;Response Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Response Value&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#response_values&quot;&gt;Response Values&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-response-codes&quot;&gt;Alarm Clock Control Point Response Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;response_codes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Success&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Op Code not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Invalid operator (returned if the Alarm ID is invalid)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-operators-and-response-values&quot;&gt;Alarm Clock Control Point Operators and Response Values&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;response_values&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value Type&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Unique identifier of the alarm on the device&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;The number of alarms matching the requested op code&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;System Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Note: the next revision of this service is expected to specify alarm notification types, e.g. vibrating motor mode, sound to play, light mode, etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Wed, 20 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/AlarmClockService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/AlarmClockService.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Activity Monitoring Service</title>
+        <description>&lt;h1 id=&quot;activity-monitoring-service&quot;&gt;Activity Monitoring Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;68b52738-4a04-40e1-8f83-337a29c3284d&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step Count&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Activity Monitoring Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;step-count-characteristic&quot;&gt;Step Count Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;7a543305-6b9e-4878-ad67-29c5a9d99736&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;step_count_characteristic&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step Count Value&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;acceleration-energy-magnitude&quot;&gt;Acceleration Energy Magnitude&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;9e3bd0d7-bdd8-41fd-af1f-5e99679183ff&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;acceleration_energy_magnitude&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Units: kJ (kilo-Joules)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;body-sensor-location-characteristic&quot;&gt;Body Sensor Location Characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;0x2A38&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml&quot;&gt;org.bluetooth.characteristic.body_sensor_location&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;activity-monitoring-control-point&quot;&gt;Activity Monitoring Control Point&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;d1b446fe-1313-4fce-9ae1-d68ae2d29e60&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#activity_monitoring_cp_opcodes&quot;&gt;Op Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;activity-monitoring-control-point-op-codes&quot;&gt;Activity Monitoring Control Point Op Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;activity_monitoring_cp_opcodes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Reset Step Count: resets the value of &lt;a href=&quot;#step_count_characteristic&quot;&gt;Step Count Value&lt;/a&gt; field to 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Reset Acceleration Energy Magnitude: resets the value of &lt;a href=&quot;#acceleration_energy_magnitude&quot;&gt;Acceleration Energy Magnitude&lt;/a&gt; to 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Wed, 20 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/ActivityMonitoringService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/ActivityMonitoringService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
   </channel>
 </rss>
