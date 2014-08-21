@@ -1,0 +1,25 @@
+
+# Site settings
+title: Angel Sensor BLE Services - Preview
+email: while1@angelsensor.com---
+layout: post
+date:   2014-08-20 21:47:34
+categories: services
+comments : false
+baseurl: /angel-sdk/protocols/preview/
+
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: AngelSensor
+github_username:  seraphimsense
+
+# Build settings
+markdown: kramdown
+#kramdown:
+#  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+  
+permalink: /:title.html
