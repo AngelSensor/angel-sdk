@@ -1,0 +1,105 @@
+<h1 id="blood-oxygen-saturation-service">Blood Oxygen Saturation Service</h1>
+<p>Service UUID: <code>902dcf38-ccc0-4902-b22c-70cab5ee5df2</code></p>
+
+<h2 id="characteristics-summary">Characteristics Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Characteristic</th>
+      <th>Read</th>
+      <th>Write</th>
+      <th>Notify</th>
+      <th>Indicate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Blood Oxygen Saturation</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <td>Body Sensor Location</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="blood-oxygen-saturation-measurement-characteristic">Blood Oxygen Saturation Measurement Characteristic</h2>
+<p>Characteristic UUID: <code>b269c33f-df6b-4c32-801d-1b963190bc71</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Blood Oxygen Saturation Value</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">FLOAT</a></td>
+      <td>Units: <a href="https://developer.bluetooth.org/gatt/units/Pages/default.aspx">percentage</a></td>
+    </tr>
+    <tr>
+      <td>Time Stamp</td>
+      <td> </td>
+      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="body-sensor-location-characteristic">Body Sensor Location Characteristic</h2>
+<p>Characterisitc UUID: <code>0x2A38</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Size</th>
+      <th>Data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Body Sensor Location</td>
+      <td>8bit</td>
+      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml">org.bluetooth.characteristic.body_sensor_location</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="protocol-revision-characteristic">Protocol Revision Characteristic</h2>
+<p>Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
+
+<p>This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Protocol Revision</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>0-255</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>TODO:</p>
+
+<ul>
+  <li>Consider making time stamp optional similar to Health Thermometer. </li>
+</ul>

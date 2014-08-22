@@ -1,0 +1,273 @@
+<h1 id="alarm-clock-service">Alarm Clock Service</h1>
+<p>Service UUID: <code>7cd50edd-8bab-44ff-a8e8-82e19393af10</code></p>
+
+<h2 id="characteristics-summary">Characteristics Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Characteristic</th>
+      <th>Read</th>
+      <th>Write</th>
+      <th>Notify</th>
+      <th>Indicate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Date Time</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Alarm Clock Control Point</td>
+      <td> </td>
+      <td>Y</td>
+      <td>Y</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Protocol Revision</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="date-time-characteristic">Date Time Characteristic</h2>
+<p>Characteristic UUID: <code>2A08</code></p>
+
+<p>Represents the current Date and Time as reported by the device clock. This characteristic follows the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a> specification. </p>
+
+<h2 id="alarm-clock-control-point">Alarm Clock Control Point</h2>
+<p>Characteristic UUID: <code>e4616b0c-22d5-11e4-a7bf-b2227cce2b54</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Op Code</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
+    </tr>
+    <tr>
+      <td>Operator</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+    </tr>
+    <tr>
+      <td>Operand</td>
+      <td>Variable</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="alarm-clock-control-point-op-codes">Alarm Clock Control Point Op Codes</h3>
+<p><a href="opcodes"> </a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Info</th>
+      <th>Operator</th>
+      <th>Operand</th>
+      <th>Response Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Report maximum supported alarms</td>
+      <td> </td>
+      <td> </td>
+      <td>Alarm Count</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Report number of alarms defined</td>
+      <td> </td>
+      <td> </td>
+      <td>Alarm Count</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Read alarm</td>
+      <td>Alarm ID</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Add alarm</td>
+      <td> </td>
+      <td>Alarm Date Time</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Remove alarm</td>
+      <td>Alarm ID</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Remove all alarms</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Set system Date Time</td>
+      <td> </td>
+      <td>System Date Time</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Reserved</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8-255</td>
+      <td>Reserved</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each write to this Control Point shall contain an Op Code and optionally one or both the Operator and the Operand.</p>
+
+<p>For example, Add Alarm is sent as follows: [Op Code=3] [Operand=date_time]. This operation does not require an operator, so the op code is followed immediately by the operand.</p>
+
+<h3 id="alarm-clock-control-point-response-format">Alarm Clock Control Point Response Format</h3>
+<p>Each response follows the next format:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Response Code</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
+      <td>See <a href="#response_codes">Response Codes</a></td>
+    </tr>
+    <tr>
+      <td>Response Value</td>
+      <td>Variable</td>
+      <td>See <a href="#response_values">Response Values</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="alarm-clock-control-point-response-codes">Alarm Clock Control Point Response Codes</h3>
+<p><a href="response_codes"> </a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Success</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Op Code not supported</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Invalid operator (returned if the Alarm ID is invalid)</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Reserved</td>
+    </tr>
+    <tr>
+      <td>5-255</td>
+      <td>Reserved</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="alarm-clock-control-point-operators-and-response-values">Alarm Clock Control Point Operators and Response Values</h3>
+<p><a href="response_values"> </a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value Type</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alarm ID</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Unique identifier of the alarm on the device</td>
+    </tr>
+    <tr>
+      <td>Alarm Date Time</td>
+      <td> </td>
+      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a></td>
+    </tr>
+    <tr>
+      <td>Alarm Count</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>The number of alarms matching the requested op code</td>
+    </tr>
+    <tr>
+      <td>System Date Time</td>
+      <td> </td>
+      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note: the next revision of this service is expected to specify alarm notification types, e.g. vibrating motor mode, sound to play, light mode, etc.</p>
+
+<h2 id="protocol-revision-characteristic">Protocol Revision Characteristic</h2>
+<p>Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
+
+<p>This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Protocol Revision</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>0-255</td>
+    </tr>
+  </tbody>
+</table>
+
