@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 .highlight {
+  margin-top: 15px;
   margin-bottom: 15px; }
 
 /**
@@ -446,3 +447,12 @@ pre {
     color: #008080; }
   .highlight .il {
     color: #099; }
+
+table, th, td {
+  border: 1px solid black; }
+
+table {
+  border-collapse: collapse; }
+
+th, td {
+  padding: 10px; }

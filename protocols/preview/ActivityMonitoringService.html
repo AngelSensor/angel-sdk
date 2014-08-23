@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Activity Monitoring Service</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <meta name="description" content="Angel SDK provides access to digital health devices using Bluetooth Low Energy. The SDK is designed for use with Angel health sensor, currently under development by Seraphim Sense Ltd. The information provided on this site is a preview for evaluation purposes only.
 ">
 
-    <link rel="stylesheet" href="/angel-sdk/protocols/preview//css/main.css">
-    <link rel="canonical" href="http://yourdomain.com/angel-sdk/protocols/preview//ActivityMonitoringService.html">
+    <link rel="stylesheet" href="/angel-sdk/protocols/preview/css/main.css">
+    <link rel="canonical" href="http://yourdomain.com/angel-sdk/protocols/preview/ActivityMonitoringService.html">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/angel-sdk/protocols/preview//">Angel Sensor BLE Services - Preview</a>
+    <a class="site-title" href="/angel-sdk/protocols/preview/">Angel Sensor BLE Services - Preview</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -53,6 +53,8 @@
         <h1 id="activity-monitoring-service">Activity Monitoring Service</h1>
 <p>Service UUID: <code>68b52738-4a04-40e1-8f83-337a29c3284d</code></p>
 
+<p>This service provides access to measurements related to physical activity and motion. To obtain these, a fitness tracker typically uses on-board accelerometer and gyroscope sensors.</p>
+
 <h2 id="characteristics-summary">Characteristics Summary</h2>
 
 <table>
@@ -66,6 +68,13 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>Activity Monitoring Feature</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
     <tr>
       <td>Step Count</td>
       <td>Y</td>
@@ -95,6 +104,13 @@
       <td> </td>
     </tr>
     <tr>
+      <td>Fall Detection</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td>Y</td>
+    </tr>
+    <tr>
       <td>Protocol Revision</td>
       <td>Y</td>
       <td> </td>
@@ -104,8 +120,68 @@
   </tbody>
 </table>
 
+<h2 id="activity-monitoring-feature">Activity Monitoring Feature</h2>
+<p>Characteristic UUID: <code>2b7c8728-8afb-4be7-b9eb-35156a443b70</code></p>
+
+<p>This characteristic defines which service features are supported by the current device. This characteristic is a constant value.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feature Flags</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">16bit</a></td>
+      <td>Bit mask indicating which activity monitoring features are supported by this device. See <a href="#feature_flags_bits">below</a>.</td>
+    </tr>
+    <tr>
+      <td>Acceleration sampling rate</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Sampling rate for the on-board accelerometer. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.</td>
+    </tr>
+    <tr>
+      <td>Gyroscope sampling rate</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Sampling rate for the on-board gyroscope. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="feature-flags-bits">Feature Flags Bits</h3>
+<p><a name="feature_flags_bits">Feature Flags bit</a> definitions are listed below. 0 indicates the feature is not supported.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bit</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Acceleration Energy Magnitude</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Fall Detection</td>
+    </tr>
+    <tr>
+      <td>2-15</td>
+      <td>Reserved</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="step-count-characteristic">Step Count Characteristic</h2>
 <p>Characteristic UUID: <code>7a543305-6b9e-4878-ad67-29c5a9d99736</code></p>
+
+<p>This characteristic represents the number of steps taken by the device wearer. The counter may be reset by issuing a relevant op code via the Activity Monitoring Control Point below.</p>
 
 <p><a href="step_count_characteristic"> </a></p>
 
@@ -126,8 +202,10 @@
   </tbody>
 </table>
 
-<h2 id="acceleration-energy-magnitude">Acceleration Energy Magnitude</h2>
+<h2 id="acceleration-energy-magnitude-characteristic">Acceleration Energy Magnitude Characteristic</h2>
 <p>Characteristic UUID: <code>9e3bd0d7-bdd8-41fd-af1f-5e99679183ff</code></p>
+
+<p>This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X<sup>2</sup> + Y<sup>2</sup> + Z<sup>2</sup>). The accumulated value may be reset by issuing a relevant op code via the <a href="#activity_monitoring_cp">Activity Monitoring Control Point</a> below.</p>
 
 <p><a name="acceleration_energy_magnitude"> </a></p>
 
@@ -169,7 +247,8 @@
 </table>
 
 <h2 id="activity-monitoring-control-point">Activity Monitoring Control Point</h2>
-<p>Characteristic UUID: <code>d1b446fe-1313-4fce-9ae1-d68ae2d29e60</code></p>
+<p><a name="activity_monitoring_cp"> </a>
+Characteristic UUID: <code>d1b446fe-1313-4fce-9ae1-d68ae2d29e60</code></p>
 
 <table>
   <thead>
@@ -208,6 +287,10 @@
       <td>Reset Acceleration Energy Magnitude: resets the value of <a href="#acceleration_energy_magnitude">Acceleration Energy Magnitude</a> to 0</td>
     </tr>
     <tr>
+      <td>3</td>
+      <td>Acknowledge Fall Detection</td>
+    </tr>
+    <tr>
       <td>0</td>
       <td>Reserved</td>
     </tr>
@@ -218,10 +301,37 @@
   </tbody>
 </table>
 
+<h2 id="fall-detection-characteristic">Fall Detection Characteristic</h2>
+<p>Characteristic UUID: <code>72f442a7-6ecd-4851-8858-403f0a7cab73</code></p>
+
+<p>This characteristic is used to announce fall detection. As soon as fall is detected, the Fall Detection Flag is set and the indication procedure begins. This characterstic is then indicated to the client every second repeatedly until the <em>Acknowledge Fall Detection</em> op code is received via the <a href="#activity_monitoring_cp">Activity Monitoring Control Point</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fall Detection Flag</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
+      <td>0 - no fall detected, 0xAA - fall detected. Other values are reserved.</td>
+    </tr>
+    <tr>
+      <td>Seconds Since Fall Detected</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint16</a></td>
+      <td>Up-counter indicating the number of seconds elapsed since the last fall detection. The counter is reset when the <em>Acknowledge Fall Detection</em> op code is received via the <a href="#activity_monitoring_cp">Activity Monitoring Control Point</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="protocol-revision-characteristic">Protocol Revision Characteristic</h2>
 <p>Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
 
-<p>This characteristic is a constant value. It defines the revision number of the current service specification. The service protocol may be updated with each specification revision.</p>
+<p>This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. </p>
 
 <table>
   <thead>
@@ -254,7 +364,7 @@
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li>Angel Sensor BLE Services - Preview</li>
-          <li><a href="mailto:while1@angelsensor.com---">while1@angelsensor.com---</a></li>
+          <li><a href="mailto:while1@angelsensor.com">while1@angelsensor.com</a></li>
         </ul>
       </div>
 
@@ -292,7 +402,7 @@
       </div>
 
       <div class="footer-col  footer-col-3">
-        <p class="text">Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+        <p class="text">Angel SDK provides access to digital health devices using Bluetooth Low Energy. The SDK is designed for use with Angel health sensor, currently under development by Seraphim Sense Ltd. The information provided on this site is a preview for evaluation purposes only.
 </p>
       </div>
     </div>

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Alarm Clock Service</title>
+    <title>Waveform Signal Service</title>
     <meta name="description" content="Angel SDK provides access to digital health devices using Bluetooth Low Energy. The SDK is designed for use with Angel health sensor, currently under development by Seraphim Sense Ltd. The information provided on this site is a preview for evaluation purposes only.
 ">
 
     <link rel="stylesheet" href="/angel-sdk/protocols/preview/css/main.css">
-    <link rel="canonical" href="http://yourdomain.com/angel-sdk/protocols/preview/AlarmClockService.html">
+    <link rel="canonical" href="http://yourdomain.com/angel-sdk/protocols/preview/WaveformSignalService.html">
 </head>
 
 
@@ -50,8 +50,14 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h1 id="alarm-clock-service">Alarm Clock Service</h1>
-<p>Service UUID: <code>7cd50edd-8bab-44ff-a8e8-82e19393af10</code></p>
+        <h1 id="waveform-signal-service">Waveform Signal Service</h1>
+<p>Service UUID: <code>481d178c-10dd-11e4-b514-b2227cce2b54</code></p>
+
+<p>This service provides access to raw waveform signals sampled by the on-board sensors of the server.</p>
+
+<p>The service was designed to enable research and advanced processing of various bio-feedback signals. The waveform signal access is an experimental features - this protocol will be revised often (see <a href="#protocol_revision">Protocol Revision</a> below).</p>
+
+<p><strong>Note</strong>: the first firwmware revisions of Angel Sensor will only support Optical Waveform and Acceleration Magnitude Waveform signals.</p>
 
 <h2 id="characteristics-summary">Characteristics Summary</h2>
 
@@ -67,14 +73,28 @@
   </thead>
   <tbody>
     <tr>
-      <td>Alarm Clock Date Time</td>
+      <td>Optical Waveform</td>
+      <td> </td>
+      <td> </td>
+      <td>Y</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Acceleration Magnitude Waveform</td>
+      <td> </td>
+      <td> </td>
+      <td>Y</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Waveform Signal Feature</td>
       <td>Y</td>
       <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
-      <td>Alarm Clock Control Point</td>
+      <td>Waveform Signal Control Point</td>
       <td> </td>
       <td>Y</td>
       <td>Y</td>
@@ -90,127 +110,8 @@
   </tbody>
 </table>
 
-<h2 id="date-time-characteristic">Date Time Characteristic</h2>
-<p>Characteristic UUID: <code>2A08</code></p>
-
-<p>Represents the current Date and Time as reported by the device clock. This characteristic follows the <a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a> specification. </p>
-
-<h2 id="alarm-clock-control-point">Alarm Clock Control Point</h2>
-<p>Characteristic UUID: <code>e4616b0c-22d5-11e4-a7bf-b2227cce2b54</code></p>
-
-<p>This characteristic allows control access to alarm clock settings. To issue a command, the client writes to the characteristic. A write datagram typically includes an op-code, operator and/or operand. The response data is provided by means of notification from the device to the client (the client must subscribe to notifications in advance).</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field name</th>
-      <th>Format</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Op Code</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
-    </tr>
-    <tr>
-      <td>Operator</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
-    </tr>
-    <tr>
-      <td>Operand</td>
-      <td>Variable</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="alarm-clock-control-point-op-codes">Alarm Clock Control Point Op Codes</h3>
-<p><a href="opcodes"> </a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Info</th>
-      <th>Operator</th>
-      <th>Operand</th>
-      <th>Response Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Report maximum supported alarms</td>
-      <td> </td>
-      <td> </td>
-      <td>Alarm Count</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Report number of alarms defined</td>
-      <td> </td>
-      <td> </td>
-      <td>Alarm Count</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Read alarm</td>
-      <td>Alarm ID</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Add alarm</td>
-      <td> </td>
-      <td>Date Time</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Remove alarm</td>
-      <td>Alarm ID</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Remove all alarms</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Set Alarm Clock Date Time</td>
-      <td> </td>
-      <td>Date Time</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>0</td>
-      <td>Reserved</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8-255</td>
-      <td>Reserved</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Each write to this Control Point shall contain an Op Code and optionally one or both the Operator and the Operand.</p>
-
-<p>For example, Add Alarm is sent as follows: [Op Code=3] [Operand=date_time]. This operation does not require an operator, so the op code is followed immediately by the operand.</p>
-
-<p>Modification of any of the defined alarms is not supported. To change an existing alarm, it should be removed and re-added using the new settings.</p>
-
-<h3 id="alarm-clock-control-point-response-format">Alarm Clock Control Point Response Format</h3>
-<p>Each response follows the next format:</p>
+<h2 id="optical-waveform-characteristic">Optical Waveform Characteristic</h2>
+<p>Characteristic UUID: <code>334c0be8-76f9-458b-bb2e-7df2b486b4d7</code></p>
 
 <table>
   <thead>
@@ -222,90 +123,121 @@
   </thead>
   <tbody>
     <tr>
-      <td>Response Code</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
-      <td>See <a href="#response_codes">Response Codes</a></td>
-    </tr>
-    <tr>
-      <td>Response Value</td>
-      <td>Variable</td>
-      <td>See <a href="#response_values">Response Values</a></td>
+      <td>WavelengthX data point</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">sint16</a>[]</td>
+      <td>Array of optical signal samples. Units: normailized signed 16-bit values. Several data points may be reported per sample, based on the <a href="#number_of_opticals">Number Of Optical Wavelengths</a> below. In this case, the wavelengths will be interleaved thus: W1-point-1, W2-point-1, W1-point-2, W2-point-2, W1-point-3, W2-point-3, and so on (in this example <em>Number Of Optical Wavelengths</em> is 3). Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="alarm-clock-control-point-response-codes">Alarm Clock Control Point Response Codes</h3>
-<p><a name="response_codes"> </a></p>
+<h2 id="acceleration-magnitude-waveform-characteristic">Acceleration Magnitude Waveform Characteristic</h2>
+<p>Characterisitc UUID: <code>4e92f4ab-c01b-4b5a-b328-699856a7c2ee</code></p>
+
+<p>This characteristic represents the acceleration energy magnitude registered by the tracker. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is <em>sqrt(X<sup>2</sup> + Y<sup>2</sup> + Z<sup>2</sup>)</em>.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Value</th>
-      <th>Info</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Success</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Op Code not supported</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Invalid operator (returned if the Alarm ID is invalid)</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Invalid operand (returned if the Date Time format is invalid)</td>
-    </tr>
-    <tr>
-      <td>0</td>
-      <td>Reserved</td>
-    </tr>
-    <tr>
-      <td>5-255</td>
-      <td>Reserved</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="alarm-clock-control-point-operators-and-response-values">Alarm Clock Control Point Operators and Response Values</h3>
-<p><a name="response_values"> </a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Value Type</th>
+      <th>Field name</th>
       <th>Format</th>
       <th>Info</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Alarm ID</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
-      <td>Unique identifier of the alarm on the device</td>
-    </tr>
-    <tr>
-      <td>Alarm Count</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
-      <td>The number of alarms matching the requested op code</td>
-    </tr>
-    <tr>
-      <td>Date Time</td>
-      <td> </td>
-      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a></td>
+      <td>Acceleration Energy Magnitude</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">sint16</a>[]</td>
+      <td>Array of acceleration magnitude samples. Units: <em>g x factor</em>, see <a href="#acceleration_scale_range">Acceleration Scale Range</a> below. Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).</td>
     </tr>
   </tbody>
 </table>
 
-<p>Note: the next revision of this service is expected to specify alarm notification types, e.g. vibrating motor mode, sound to play, light mode, etc.</p>
+<h2 id="waveform-signal-feature">Waveform Signal Feature</h2>
+<p>Characterisitc UUID: <code>4cb32ae6-0cfe-47dc-a4f6-59f52cdc2910</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feature Bits</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">8bit</a></td>
+      <td>Bit mask indicating which waveform signal features are supported by this device. See <a href="#feature_flags_bits">below</a>.</td>
+    </tr>
+    <tr>
+      <td><a name="number_of_opticals">Number Of Optical Wavelengths</a></td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Denotes the number of different wavelength data points present in each optical waveform sample. Valid range: 1-4. 0 indicates the <em>Optical Waveform</em> feature is not supported.</td>
+    </tr>
+    <tr>
+      <td>Optical Wavelengths</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint16</a>[]</td>
+      <td>Array specifying the different wavelengths of the optical signal. Units: <em>nm x 10</em> (e.g. 6255 denotes 625.5 <em>nm</em> in the red spectrum range). The number of elements in array follows the value of the <em>Number Of Optical Wavelengths</em> field above. 0 indicates undisclosed wavelength. This field is not present when the <em>Number Of Optical Wavelength</em> is zero.</td>
+    </tr>
+    <tr>
+      <td>Acceleration Sampling Rate</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Sampling rate for the on-board accelerometer. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.</td>
+    </tr>
+    <tr>
+      <td><a href="acceleration_scale_range">Acceleration Scale Range</a></td>
+      <td>8bit</td>
+      <td>0: ±2g<br />1: ±4g<br />2: ±8g<br />3:±16g<br />4-7: Reserved</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="feature-flags-bits">Feature Flags Bits</h3>
+<p><a name="feature_flags_bits">Feature Flags bit</a> definitions are listed below. 0 indicates the feature is not supported.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bit</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Optical Waveform</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Acceleration Magnitude Waveform</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Acceleration XYZ Waveform</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Acoustical Waveform</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Gyroscope XYZ Waveform</td>
+    </tr>
+    <tr>
+      <td>5-15</td>
+      <td>Reserved</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="waveform-signal-control-point">Waveform Signal Control Point</h2>
+<p>Characterisitc UUID: <code>d271ecf2-af6e-4064-ae1e-6b8fd0baaecc</code></p>
+
+<p>TBD in revision 2.</p>
 
 <h2 id="protocol-revision-characteristic">Protocol Revision Characteristic</h2>
-<p>Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
+<p><a name="protocol_revision"></a>
+Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
 
 <p>This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. </p>
 
