@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/angel-sdk/protocols/preview/</link>
     <atom:link href="http://yourdomain.com/angel-sdk/protocols/preview/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 23 Aug 2014 20:34:38 +0300</pubDate>
-    <lastBuildDate>Sat, 23 Aug 2014 20:34:38 +0300</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2015 17:23:37 +0300</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2015 17:23:37 +0300</lastBuildDate>
     <generator>Jekyll v2.3.0</generator>
     
       <item>
@@ -42,7 +42,7 @@
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;Acceleration Magnitude Waveform&lt;/td&gt;
+      &lt;td&gt;Acceleration Waveform&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
       &lt;td&gt;Y&lt;/td&gt;
@@ -92,7 +92,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;acceleration-magnitude-waveform-characteristic&quot;&gt;Acceleration Magnitude Waveform Characteristic&lt;/h2&gt;
+&lt;h2 id=&quot;acceleration-waveform-characteristic&quot;&gt;Acceleration Waveform Characteristic&lt;/h2&gt;
 &lt;p&gt;Characterisitc UUID: &lt;code&gt;4e92f4ab-c01b-4b5a-b328-699856a7c2ee&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;This characteristic represents the acceleration energy magnitude registered by the tracker. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is &lt;em&gt;sqrt(X&lt;sup&gt;2&lt;/sup&gt; + Y&lt;sup&gt;2&lt;/sup&gt; + Z&lt;sup&gt;2&lt;/sup&gt;)&lt;/em&gt;.&lt;/p&gt;
@@ -107,8 +107,8 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;sint16&lt;/a&gt;[]&lt;/td&gt;
+      &lt;td&gt;Acceleration Magnitude&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;[]&lt;/td&gt;
       &lt;td&gt;Array of acceleration magnitude samples. Units: &lt;em&gt;g x factor&lt;/em&gt;, see &lt;a href=&quot;#acceleration_scale_range&quot;&gt;Acceleration Scale Range&lt;/a&gt; below. Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -235,9 +235,374 @@ Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&g
         <description>&lt;h1 id=&quot;health-journal-service&quot;&gt;Health Journal Service&lt;/h1&gt;
 &lt;p&gt;Profile UUID: &lt;code&gt;87ef07ff-4739-4527-b38f-b0e228de6ed3&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This service provides access to the health metrics recorded and stored by the server in non-volatile memory.&lt;/p&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;TBD. Coming soon…&lt;/p&gt;
+&lt;p&gt;Health Journal records the health metrics produced by Angel Sensor. These are stored in non-volatile memory on the device in a structure similar to ring buffer (when full, the oldest records are overwritten to make space for the new ones). The entries of Health Journal can be accessed using the Health Journal Control Point.&lt;/p&gt;
+
+&lt;p&gt;In the scope of this service, Angel Sensor acts as the Server and the application using this service is the Client.&lt;/p&gt;
+
+&lt;p&gt;All characteristic values used with this service are transmitted with the least significant byte first (i.e. little endian).&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Health Journal Entry&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Health Journal Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;health-journal-entry-characteristic&quot;&gt;Health Journal Entry characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;8b713a94-070a-4743-a695-fc58cb3f236b&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The Health Journal Entry characteristic is used to send the recorded measurements from the Server to the Client. Included in the characteristic value are Timestamp and Flags fields, as well as one or more measurement fields such as Heart Rate, Temperature, and others.&lt;/p&gt;
+
+&lt;p&gt;When the Client Characteristic Configuration descriptor is configured for notifications the Health Journal Control Point can be used to control notifications of this characteristic.&lt;/p&gt;
+
+&lt;h3 id=&quot;fields&quot;&gt;Fields&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Timestamp&lt;/td&gt;
+      &lt;td&gt;56bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Flags&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;#flags&quot;&gt;See below&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Heart rate&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Beats per minute&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Oxygen saturation&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;SpO&lt;sub&gt;2&lt;/sub&gt; percentage, 0-100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Temperature&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;SFLOAT&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Degrees, Celsius&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step count&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Number of steps taken since the last the counter reset (see &lt;a href=&quot;ActivityMonitoringService.html&quot;&gt;ActivityMonitoringService&lt;/a&gt; for details)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Energy expenditure&lt;/td&gt;
+      &lt;td&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;Calories, &lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration energy&lt;/td&gt;
+      &lt;td&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;Motion quantifier, &lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MAX SIZE&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- Double-check max payload!!! --&gt;
+
+&lt;h3 id=&quot;a-nameflagsflagsa&quot;&gt;&lt;a name=&quot;flags&quot;&gt;Flags&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Bit&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Heart rate status&lt;/td&gt;
+      &lt;td&gt;0: Heart rate not present&lt;br /&gt; 1: Heart rate present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Oxygen saturation status&lt;/td&gt;
+      &lt;td&gt;0: Oxygen saturation not present&lt;br /&gt; 1: Oxygen saturation present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Temperature status&lt;/td&gt;
+      &lt;td&gt;0: Temperature not present&lt;br /&gt;1: Temperature present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Step count status&lt;/td&gt;
+      &lt;td&gt;0: Step count not present&lt;br /&gt; 1: Step count present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Energy expenditure status&lt;/td&gt;
+      &lt;td&gt;0: Energy expenditure not present&lt;br /&gt; 1: Energy expenditure present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Acceleration energy status&lt;/td&gt;
+      &lt;td&gt;0: Acceleration energy not present&lt;br /&gt; 1: Acceleration energy present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6-7&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt;Always 0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;health-journal-control-point-characteristic&quot;&gt;Health Journal Control Point characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;5ae61782-4a65-4202-a4da-db73406e38e8&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For this service to operate, applications utilizing this service will need to ensure that the Client configures the Health Journal Control Point characteristic for indications (i.e., via the Client Characteristic Configuration descriptor).&lt;/p&gt;
+
+&lt;p&gt;The Client must perform a write to the Health Journal Control Point to execute a desired procedure at the Server.&lt;/p&gt;
+
+&lt;h3 id=&quot;write-format&quot;&gt;Write format&lt;/h3&gt;
+
+&lt;p&gt;Each write to the Health Journal Control Point must contain the following fields:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op code&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#op_codes&quot;&gt;Op-Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operator&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#operators&quot;&gt;Operators-Operands&lt;/a&gt; below&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operand&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#operators&quot;&gt;Operators-Operands&lt;/a&gt; below&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;a-nameopcodesop-codesa&quot;&gt;&lt;a name=&quot;op_codes&quot;&gt;Op-Codes:&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Op Code&lt;/th&gt;
+      &lt;th&gt;Operation&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Query entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Delete entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Abort operation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Query number of entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0, 5-255&lt;/td&gt;
+      &lt;td&gt;Reserved, must not be used&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;a-nameoperatorsoperatorsoperandsa&quot;&gt;&lt;a name=&quot;operators&quot;&gt;Operators/Operands:&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Operator&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Operand&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;All entries&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;First entry&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Last entry&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Less than or equal to&lt;/td&gt;
+      &lt;td&gt;&amp;lt;max timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Greater than or equal to&lt;/td&gt;
+      &lt;td&gt;&amp;lt;min timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Within range&lt;/td&gt;
+      &lt;td&gt;&amp;lt;min timestamp, max timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6-255&lt;/td&gt;
+      &lt;td&gt;Reserved, must not be used&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;responseerror-codes&quot;&gt;Response/error codes&lt;/h3&gt;
+
+&lt;p&gt;Response codes of 0x80 and higher indicate an erroneous operation result.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Success&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x80&lt;/td&gt;
+      &lt;td&gt;Op code not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x81&lt;/td&gt;
+      &lt;td&gt;Operator not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x82&lt;/td&gt;
+      &lt;td&gt;Operand not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x83&lt;/td&gt;
+      &lt;td&gt;Client Characteristic Configuration Descriptor improperly configured, either notifications or indications must be on&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x84&lt;/td&gt;
+      &lt;td&gt;Invalid operator format&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x85&lt;/td&gt;
+      &lt;td&gt;Invalid operand format&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x86&lt;/td&gt;
+      &lt;td&gt;Abort unsuccessful, sent if request for Abort cannot be completed&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x87&lt;/td&gt;
+      &lt;td&gt;Procedure not completed, sent if unable to complete a procedure for any reason&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x88&lt;/td&gt;
+      &lt;td&gt;Procedure already in progress&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x89&lt;/td&gt;
+      &lt;td&gt;Not found, no results meet the last query criteria&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x9F&lt;/td&gt;
+      &lt;td&gt;Generic/unspecified error&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is a constant value. It defines the revision number of the current service specification. Applications using this service will need to read the revision value in order to establish the particular service protocol supported by the Client.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- External links below --&gt;
 </description>
         <pubDate>Mon, 04 Aug 2014 00:00:00 +0300</pubDate>
         <link>http://yourdomain.com/angel-sdk/protocols/preview/HealthJournalService.html</link>
@@ -812,7 +1177,7 @@ Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&g
 &lt;h2 id=&quot;acceleration-energy-magnitude-characteristic&quot;&gt;Acceleration Energy Magnitude Characteristic&lt;/h2&gt;
 &lt;p&gt;Characteristic UUID: &lt;code&gt;9e3bd0d7-bdd8-41fd-af1f-5e99679183ff&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X&lt;sup&gt;2&lt;/sup&gt; + Y&lt;sup&gt;2&lt;/sup&gt; + Z&lt;sup&gt;2&lt;/sup&gt;). The accumulated value may be reset by issuing a relevant op code via the &lt;a href=&quot;#activity_monitoring_cp&quot;&gt;Activity Monitoring Control Point&lt;/a&gt; below.&lt;/p&gt;
+&lt;p&gt;This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X&lt;sup&gt;2&lt;/sup&gt; + Y&lt;sup&gt;2&lt;/sup&gt; + Z&lt;sup&gt;2&lt;/sup&gt;). Summing the above value at discrete intervals (sampling rate) produces the integral of acceleration magnitude over time. This value may be reset by issuing a relevant op code via the &lt;a href=&quot;#activity_monitoring_cp&quot;&gt;Activity Monitoring Control Point&lt;/a&gt; below.&lt;/p&gt;
 
 &lt;p&gt;&lt;a name=&quot;acceleration_energy_magnitude&quot;&gt; &lt;/a&gt;&lt;/p&gt;
 
@@ -827,8 +1192,8 @@ Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&g
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;Units: kJ (kilo-Joules)&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint32&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Units: g (9.8m/s&lt;sup&gt;2&lt;/sup&gt;)&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;

@@ -53,9 +53,374 @@
         <h1 id="health-journal-service">Health Journal Service</h1>
 <p>Profile UUID: <code>87ef07ff-4739-4527-b38f-b0e228de6ed3</code></p>
 
-<p>This service provides access to the health metrics recorded and stored by the server in non-volatile memory.</p>
+<h2 id="introduction">Introduction</h2>
 
-<p><br /><br />TBD. Coming soon…</p>
+<p>Health Journal records the health metrics produced by Angel Sensor. These are stored in non-volatile memory on the device in a structure similar to ring buffer (when full, the oldest records are overwritten to make space for the new ones). The entries of Health Journal can be accessed using the Health Journal Control Point.</p>
+
+<p>In the scope of this service, Angel Sensor acts as the Server and the application using this service is the Client.</p>
+
+<p>All characteristic values used with this service are transmitted with the least significant byte first (i.e. little endian).</p>
+
+<h2 id="characteristics-summary">Characteristics Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Characteristic</th>
+      <th>Read</th>
+      <th>Write</th>
+      <th>Notify</th>
+      <th>Indicate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Health Journal Entry</td>
+      <td> </td>
+      <td> </td>
+      <td>Y</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Health Journal Control Point</td>
+      <td> </td>
+      <td>Y</td>
+      <td> </td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <td>Protocol Revision</td>
+      <td>Y</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="health-journal-entry-characteristic">Health Journal Entry characteristic</h2>
+<p>Characteristic UUID: <code>8b713a94-070a-4743-a695-fc58cb3f236b</code></p>
+
+<p>The Health Journal Entry characteristic is used to send the recorded measurements from the Server to the Client. Included in the characteristic value are Timestamp and Flags fields, as well as one or more measurement fields such as Heart Rate, Temperature, and others.</p>
+
+<p>When the Client Characteristic Configuration descriptor is configured for notifications the Health Journal Control Point can be used to control notifications of this characteristic.</p>
+
+<h3 id="fields">Fields</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Size</th>
+      <th>Data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Timestamp</td>
+      <td>56bit</td>
+      <td><a href="https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml">org.bluetooth.characteristic.date_time</a></td>
+    </tr>
+    <tr>
+      <td>Flags</td>
+      <td>8bit</td>
+      <td><a href="#flags">See below</a></td>
+    </tr>
+    <tr>
+      <td>Heart rate</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>Beats per minute</td>
+    </tr>
+    <tr>
+      <td>Oxygen saturation</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>SpO<sub>2</sub> percentage, 0-100</td>
+    </tr>
+    <tr>
+      <td>Temperature</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">SFLOAT</a></td>
+      <td>Degrees, Celsius</td>
+    </tr>
+    <tr>
+      <td>Step count</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint24</a></td>
+      <td>Number of steps taken since the last the counter reset (see <a href="ActivityMonitoringService.html">ActivityMonitoringService</a> for details)</td>
+    </tr>
+    <tr>
+      <td>Energy expenditure</td>
+      <td><em>TBD</em></td>
+      <td>Calories, <em>TBD</em></td>
+    </tr>
+    <tr>
+      <td>Acceleration energy</td>
+      <td><em>TBD</em></td>
+      <td>Motion quantifier, <em>TBD</em></td>
+    </tr>
+    <tr>
+      <td><strong>MAX SIZE</strong></td>
+      <td><strong><em>TBD</em></strong></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Double-check max payload!!! -->
+
+<h3 id="a-nameflagsflagsa"><a name="flags">Flags</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bit</th>
+      <th>Name</th>
+      <th>Data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Heart rate status</td>
+      <td>0: Heart rate not present<br /> 1: Heart rate present</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Oxygen saturation status</td>
+      <td>0: Oxygen saturation not present<br /> 1: Oxygen saturation present</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Temperature status</td>
+      <td>0: Temperature not present<br />1: Temperature present</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Step count status</td>
+      <td>0: Step count not present<br /> 1: Step count present</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Energy expenditure status</td>
+      <td>0: Energy expenditure not present<br /> 1: Energy expenditure present</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Acceleration energy status</td>
+      <td>0: Acceleration energy not present<br /> 1: Acceleration energy present</td>
+    </tr>
+    <tr>
+      <td>6-7</td>
+      <td>Reserved</td>
+      <td>Always 0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="health-journal-control-point-characteristic">Health Journal Control Point characteristic</h2>
+<p>Characterisitc UUID: <code>5ae61782-4a65-4202-a4da-db73406e38e8</code></p>
+
+<p>For this service to operate, applications utilizing this service will need to ensure that the Client configures the Health Journal Control Point characteristic for indications (i.e., via the Client Characteristic Configuration descriptor).</p>
+
+<p>The Client must perform a write to the Health Journal Control Point to execute a desired procedure at the Server.</p>
+
+<h3 id="write-format">Write format</h3>
+
+<p>Each write to the Health Journal Control Point must contain the following fields:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Size</th>
+      <th>Data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Op code</td>
+      <td>8bit</td>
+      <td>See <a href="#op_codes">Op-Codes</a></td>
+    </tr>
+    <tr>
+      <td>Operator</td>
+      <td>8bit</td>
+      <td>See <a href="#operators">Operators-Operands</a> below</td>
+    </tr>
+    <tr>
+      <td>Operand</td>
+      <td>Variable</td>
+      <td>See <a href="#operators">Operators-Operands</a> below</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="a-nameopcodesop-codesa"><a name="op_codes">Op-Codes:</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Op Code</th>
+      <th>Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Query entries</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Delete entries</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Abort operation</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Query number of entries</td>
+    </tr>
+    <tr>
+      <td>0, 5-255</td>
+      <td>Reserved, must not be used</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="a-nameoperatorsoperatorsoperandsa"><a name="operators">Operators/Operands:</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Code</th>
+      <th>Operand</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>All entries</td>
+      <td>No operands used</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>First entry</td>
+      <td>No operands used</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Last entry</td>
+      <td>No operands used</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Less than or equal to</td>
+      <td>&lt;max timestamp&gt;</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Greater than or equal to</td>
+      <td>&lt;min timestamp&gt;</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Within range</td>
+      <td>&lt;min timestamp, max timestamp&gt;</td>
+    </tr>
+    <tr>
+      <td>6-255</td>
+      <td>Reserved, must not be used</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="responseerror-codes">Response/error codes</h3>
+
+<p>Response codes of 0x80 and higher indicate an erroneous operation result.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Success</td>
+    </tr>
+    <tr>
+      <td>0x80</td>
+      <td>Op code not supported</td>
+    </tr>
+    <tr>
+      <td>0x81</td>
+      <td>Operator not supported</td>
+    </tr>
+    <tr>
+      <td>0x82</td>
+      <td>Operand not supported</td>
+    </tr>
+    <tr>
+      <td>0x83</td>
+      <td>Client Characteristic Configuration Descriptor improperly configured, either notifications or indications must be on</td>
+    </tr>
+    <tr>
+      <td>0x84</td>
+      <td>Invalid operator format</td>
+    </tr>
+    <tr>
+      <td>0x85</td>
+      <td>Invalid operand format</td>
+    </tr>
+    <tr>
+      <td>0x86</td>
+      <td>Abort unsuccessful, sent if request for Abort cannot be completed</td>
+    </tr>
+    <tr>
+      <td>0x87</td>
+      <td>Procedure not completed, sent if unable to complete a procedure for any reason</td>
+    </tr>
+    <tr>
+      <td>0x88</td>
+      <td>Procedure already in progress</td>
+    </tr>
+    <tr>
+      <td>0x89</td>
+      <td>Not found, no results meet the last query criteria</td>
+    </tr>
+    <tr>
+      <td>0x9F</td>
+      <td>Generic/unspecified error</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="protocol-revision-characteristic">Protocol Revision Characteristic</h2>
+<p>Characteristic UUID: <code>3b8e7983-133a-4a0f-90fc-82006ed55505</code></p>
+
+<p>This characteristic is a constant value. It defines the revision number of the current service specification. Applications using this service will need to read the revision value in order to establish the particular service protocol supported by the Client.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field name</th>
+      <th>Format</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Protocol Revision</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint8</a></td>
+      <td>0-255</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- External links below -->
 
       </div>
     </div>

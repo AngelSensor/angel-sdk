@@ -80,7 +80,7 @@
       <td> </td>
     </tr>
     <tr>
-      <td>Acceleration Magnitude Waveform</td>
+      <td>Acceleration Waveform</td>
       <td> </td>
       <td> </td>
       <td>Y</td>
@@ -130,7 +130,7 @@
   </tbody>
 </table>
 
-<h2 id="acceleration-magnitude-waveform-characteristic">Acceleration Magnitude Waveform Characteristic</h2>
+<h2 id="acceleration-waveform-characteristic">Acceleration Waveform Characteristic</h2>
 <p>Characterisitc UUID: <code>4e92f4ab-c01b-4b5a-b328-699856a7c2ee</code></p>
 
 <p>This characteristic represents the acceleration energy magnitude registered by the tracker. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is <em>sqrt(X<sup>2</sup> + Y<sup>2</sup> + Z<sup>2</sup>)</em>.</p>
@@ -145,8 +145,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>Acceleration Energy Magnitude</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">sint16</a>[]</td>
+      <td>Acceleration Magnitude</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint24</a>[]</td>
       <td>Array of acceleration magnitude samples. Units: <em>g x factor</em>, see <a href="#acceleration_scale_range">Acceleration Scale Range</a> below. Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).</td>
     </tr>
   </tbody>

@@ -205,7 +205,7 @@
 <h2 id="acceleration-energy-magnitude-characteristic">Acceleration Energy Magnitude Characteristic</h2>
 <p>Characteristic UUID: <code>9e3bd0d7-bdd8-41fd-af1f-5e99679183ff</code></p>
 
-<p>This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X<sup>2</sup> + Y<sup>2</sup> + Z<sup>2</sup>). The accumulated value may be reset by issuing a relevant op code via the <a href="#activity_monitoring_cp">Activity Monitoring Control Point</a> below.</p>
+<p>This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X<sup>2</sup> + Y<sup>2</sup> + Z<sup>2</sup>). Summing the above value at discrete intervals (sampling rate) produces the integral of acceleration magnitude over time. This value may be reset by issuing a relevant op code via the <a href="#activity_monitoring_cp">Activity Monitoring Control Point</a> below.</p>
 
 <p><a name="acceleration_energy_magnitude"> </a></p>
 
@@ -220,8 +220,8 @@
   <tbody>
     <tr>
       <td>Acceleration Energy Magnitude</td>
-      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint24</a></td>
-      <td>Units: kJ (kilo-Joules)</td>
+      <td><a href="https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx">uint32</a></td>
+      <td>Units: g (9.8m/s<sup>2</sup>)</td>
     </tr>
   </tbody>
 </table>
