@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:paddingTop="3dp"
+    android:paddingBottom="2dp"
+			  android:background="#80000000">
+
+	<TextView
+		style="@style/ListItem"
+		android:id="@+id/item_name"
+		android:textColor="@color/angel_gold_color"
+		android:background="@android:color/transparent"
+		android:cacheColorHint="@android:color/transparent">
+	</TextView>
+
+	<TextView
+		style="@style/ListItemKey"
+		android:id="@+id/item_key"
+		android:textColor="@color/angel_gold_color"
+		android:background="@android:color/transparent"
+		android:cacheColorHint="@android:color/transparent">
+	</TextView>
+</LinearLayout>

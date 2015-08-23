@@ -1,0 +1,6 @@
+#-dontwarn
+-keep public class com.angel.sdk.*
+-keep public class com.angel.sdk.*$* {
+    *;
+}
+-keepattributes Exceptions,InnerClasses

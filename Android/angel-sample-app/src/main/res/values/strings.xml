@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AngelSensor</string>
+    <string name="action_settings">Settings</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="temperatur">Temperature</string>
+    <string name="scan">SCAN</string>
+    <string name="scanning">SCANNING...</string>
+    <string name="disconnect">DISCONNECT</string>
+    <string name="device_name">Device Name</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="scan_welcome">Welcome to Angel Sensor! Please press Angel\'s button once to re-activate Bluetooth and tap SCAN."</string>
+
+</resources>

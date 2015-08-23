@@ -1,16 +1,28 @@
-# built application files
+# Compiled application files
 *.apk
 *.ap_
 
-# files for the dex VM
+# Files for the dex VM
 *.dex
 
 # Java class files
 *.class
 
-# generated files
+# Generated and binary files, Eclipse-style
 bin/
 gen/
 
-#Eclipse UI settings
+# Eclipse UI settings
 .settings
+
+# Dot files in general
+.*
+
+# Build subtree
+build/
+
+# Auto-generated Android Studio files
+local.properties
+
+# Windows thumbnails
+Thumbs.db
