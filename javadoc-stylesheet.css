@@ -45,7 +45,7 @@ h1 { font-size: 1.5em; line-height: 1.286em;}
 /* Font used in left-hand frame lists */
 .FrameTitleFont   { font-size: 100%; }
 .FrameHeadingFont { font-size:  90%; }
-.FrameItemFont { font-size:  0.9em; line-height: 1.3em; 
+.FrameItemFont { font-size:  0.9em; line-height: 1.3em;
 }
 /* Java Interfaces */
 .FrameItemFont a i {
@@ -63,4 +63,3 @@ h1 { font-size: 1.5em; line-height: 1.286em;}
 
 .NavBarCell2    { background-color:#FFFFFF; color:#000000}
 .NavBarCell3    { background-color:#FFFFFF; color:#000000}
-
