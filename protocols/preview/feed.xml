@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Angel Sensor BLE Services - Preview</title>
+    <description>Angel SDK provides access to digital health devices using Bluetooth Low Energy. The SDK is designed for use with Angel health sensor, currently under development by Seraphim Sense Ltd. The information provided on this site is a preview for evaluation purposes only.
+</description>
+    <link>http://yourdomain.com/angel-sdk/protocols/preview/</link>
+    <atom:link href="http://yourdomain.com/angel-sdk/protocols/preview/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 28 Apr 2015 17:23:37 +0300</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2015 17:23:37 +0300</lastBuildDate>
+    <generator>Jekyll v2.3.0</generator>
+    
+      <item>
+        <title>Waveform Signal Service</title>
+        <description>&lt;h1 id=&quot;waveform-signal-service&quot;&gt;Waveform Signal Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;481d178c-10dd-11e4-b514-b2227cce2b54&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This service provides access to raw waveform signals sampled by the on-board sensors of the server.&lt;/p&gt;
+
+&lt;p&gt;The service was designed to enable research and advanced processing of various bio-feedback signals. The waveform signal access is an experimental features - this protocol will be revised often (see &lt;a href=&quot;#protocol_revision&quot;&gt;Protocol Revision&lt;/a&gt; below).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: the first firwmware revisions of Angel Sensor will only support Optical Waveform and Acceleration Magnitude Waveform signals.&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Optical Waveform&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Waveform&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Waveform Signal Feature&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Waveform Signal Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;optical-waveform-characteristic&quot;&gt;Optical Waveform Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;334c0be8-76f9-458b-bb2e-7df2b486b4d7&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;WavelengthX data point&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;sint16&lt;/a&gt;[]&lt;/td&gt;
+      &lt;td&gt;Array of optical signal samples. Units: normailized signed 16-bit values. Several data points may be reported per sample, based on the &lt;a href=&quot;#number_of_opticals&quot;&gt;Number Of Optical Wavelengths&lt;/a&gt; below. In this case, the wavelengths will be interleaved thus: W1-point-1, W2-point-1, W1-point-2, W2-point-2, W1-point-3, W2-point-3, and so on (in this example &lt;em&gt;Number Of Optical Wavelengths&lt;/em&gt; is 3). Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;acceleration-waveform-characteristic&quot;&gt;Acceleration Waveform Characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;4e92f4ab-c01b-4b5a-b328-699856a7c2ee&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic represents the acceleration energy magnitude registered by the tracker. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is &lt;em&gt;sqrt(X&lt;sup&gt;2&lt;/sup&gt; + Y&lt;sup&gt;2&lt;/sup&gt; + Z&lt;sup&gt;2&lt;/sup&gt;)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Magnitude&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;[]&lt;/td&gt;
+      &lt;td&gt;Array of acceleration magnitude samples. Units: &lt;em&gt;g x factor&lt;/em&gt;, see &lt;a href=&quot;#acceleration_scale_range&quot;&gt;Acceleration Scale Range&lt;/a&gt; below. Each notification will carry the maximum number of samples that the BLE MTU allows (typically 20B).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;waveform-signal-feature&quot;&gt;Waveform Signal Feature&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;4cb32ae6-0cfe-47dc-a4f6-59f52cdc2910&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Feature Bits&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Bit mask indicating which waveform signal features are supported by this device. See &lt;a href=&quot;#feature_flags_bits&quot;&gt;below&lt;/a&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a name=&quot;number_of_opticals&quot;&gt;Number Of Optical Wavelengths&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Denotes the number of different wavelength data points present in each optical waveform sample. Valid range: 1-4. 0 indicates the &lt;em&gt;Optical Waveform&lt;/em&gt; feature is not supported.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Optical Wavelengths&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint16&lt;/a&gt;[]&lt;/td&gt;
+      &lt;td&gt;Array specifying the different wavelengths of the optical signal. Units: &lt;em&gt;nm x 10&lt;/em&gt; (e.g. 6255 denotes 625.5 &lt;em&gt;nm&lt;/em&gt; in the red spectrum range). The number of elements in array follows the value of the &lt;em&gt;Number Of Optical Wavelengths&lt;/em&gt; field above. 0 indicates undisclosed wavelength. This field is not present when the &lt;em&gt;Number Of Optical Wavelength&lt;/em&gt; is zero.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Sampling Rate&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Sampling rate for the on-board accelerometer. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;acceleration_scale_range&quot;&gt;Acceleration Scale Range&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;0: ±2g&lt;br /&gt;1: ±4g&lt;br /&gt;2: ±8g&lt;br /&gt;3:±16g&lt;br /&gt;4-7: Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;feature-flags-bits&quot;&gt;Feature Flags Bits&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;feature_flags_bits&quot;&gt;Feature Flags bit&lt;/a&gt; definitions are listed below. 0 indicates the feature is not supported.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Bit&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Optical Waveform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Acceleration Magnitude Waveform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Acceleration XYZ Waveform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Acoustical Waveform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Gyroscope XYZ Waveform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5-15&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;waveform-signal-control-point&quot;&gt;Waveform Signal Control Point&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;d271ecf2-af6e-4064-ae1e-6b8fd0baaecc&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;TBD in revision 2.&lt;/p&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;&lt;a name=&quot;protocol_revision&quot;&gt;&lt;/a&gt;
+Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. &lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Tue, 05 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/angel-sdk/protocols/preview/WaveformSignalService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/angel-sdk/protocols/preview/WaveformSignalService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
+      <item>
+        <title>Health Journal Service</title>
+        <description>&lt;h1 id=&quot;health-journal-service&quot;&gt;Health Journal Service&lt;/h1&gt;
+&lt;p&gt;Profile UUID: &lt;code&gt;87ef07ff-4739-4527-b38f-b0e228de6ed3&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Health Journal records the health metrics produced by Angel Sensor. These are stored in non-volatile memory on the device in a structure similar to ring buffer (when full, the oldest records are overwritten to make space for the new ones). The entries of Health Journal can be accessed using the Health Journal Control Point.&lt;/p&gt;
+
+&lt;p&gt;In the scope of this service, Angel Sensor acts as the Server and the application using this service is the Client.&lt;/p&gt;
+
+&lt;p&gt;All characteristic values used with this service are transmitted with the least significant byte first (i.e. little endian).&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Health Journal Entry&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Health Journal Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;health-journal-entry-characteristic&quot;&gt;Health Journal Entry characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;8b713a94-070a-4743-a695-fc58cb3f236b&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The Health Journal Entry characteristic is used to send the recorded measurements from the Server to the Client. Included in the characteristic value are Timestamp and Flags fields, as well as one or more measurement fields such as Heart Rate, Temperature, and others.&lt;/p&gt;
+
+&lt;p&gt;When the Client Characteristic Configuration descriptor is configured for notifications the Health Journal Control Point can be used to control notifications of this characteristic.&lt;/p&gt;
+
+&lt;h3 id=&quot;fields&quot;&gt;Fields&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Timestamp&lt;/td&gt;
+      &lt;td&gt;56bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Flags&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;#flags&quot;&gt;See below&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Heart rate&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Beats per minute&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Oxygen saturation&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;SpO&lt;sub&gt;2&lt;/sub&gt; percentage, 0-100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Temperature&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;SFLOAT&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Degrees, Celsius&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step count&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Number of steps taken since the last the counter reset (see &lt;a href=&quot;ActivityMonitoringService.html&quot;&gt;ActivityMonitoringService&lt;/a&gt; for details)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Energy expenditure&lt;/td&gt;
+      &lt;td&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;Calories, &lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration energy&lt;/td&gt;
+      &lt;td&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;Motion quantifier, &lt;em&gt;TBD&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MAX SIZE&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;&lt;em&gt;TBD&lt;/em&gt;&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- Double-check max payload!!! --&gt;
+
+&lt;h3 id=&quot;a-nameflagsflagsa&quot;&gt;&lt;a name=&quot;flags&quot;&gt;Flags&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Bit&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Heart rate status&lt;/td&gt;
+      &lt;td&gt;0: Heart rate not present&lt;br /&gt; 1: Heart rate present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Oxygen saturation status&lt;/td&gt;
+      &lt;td&gt;0: Oxygen saturation not present&lt;br /&gt; 1: Oxygen saturation present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Temperature status&lt;/td&gt;
+      &lt;td&gt;0: Temperature not present&lt;br /&gt;1: Temperature present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Step count status&lt;/td&gt;
+      &lt;td&gt;0: Step count not present&lt;br /&gt; 1: Step count present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Energy expenditure status&lt;/td&gt;
+      &lt;td&gt;0: Energy expenditure not present&lt;br /&gt; 1: Energy expenditure present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Acceleration energy status&lt;/td&gt;
+      &lt;td&gt;0: Acceleration energy not present&lt;br /&gt; 1: Acceleration energy present&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6-7&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt;Always 0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;health-journal-control-point-characteristic&quot;&gt;Health Journal Control Point characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;5ae61782-4a65-4202-a4da-db73406e38e8&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For this service to operate, applications utilizing this service will need to ensure that the Client configures the Health Journal Control Point characteristic for indications (i.e., via the Client Characteristic Configuration descriptor).&lt;/p&gt;
+
+&lt;p&gt;The Client must perform a write to the Health Journal Control Point to execute a desired procedure at the Server.&lt;/p&gt;
+
+&lt;h3 id=&quot;write-format&quot;&gt;Write format&lt;/h3&gt;
+
+&lt;p&gt;Each write to the Health Journal Control Point must contain the following fields:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op code&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#op_codes&quot;&gt;Op-Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operator&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#operators&quot;&gt;Operators-Operands&lt;/a&gt; below&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operand&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#operators&quot;&gt;Operators-Operands&lt;/a&gt; below&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;a-nameopcodesop-codesa&quot;&gt;&lt;a name=&quot;op_codes&quot;&gt;Op-Codes:&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Op Code&lt;/th&gt;
+      &lt;th&gt;Operation&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Query entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Delete entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Abort operation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Query number of entries&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0, 5-255&lt;/td&gt;
+      &lt;td&gt;Reserved, must not be used&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;a-nameoperatorsoperatorsoperandsa&quot;&gt;&lt;a name=&quot;operators&quot;&gt;Operators/Operands:&lt;/a&gt;&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Operator&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Operand&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;All entries&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;First entry&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Last entry&lt;/td&gt;
+      &lt;td&gt;No operands used&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Less than or equal to&lt;/td&gt;
+      &lt;td&gt;&amp;lt;max timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Greater than or equal to&lt;/td&gt;
+      &lt;td&gt;&amp;lt;min timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Within range&lt;/td&gt;
+      &lt;td&gt;&amp;lt;min timestamp, max timestamp&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6-255&lt;/td&gt;
+      &lt;td&gt;Reserved, must not be used&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;responseerror-codes&quot;&gt;Response/error codes&lt;/h3&gt;
+
+&lt;p&gt;Response codes of 0x80 and higher indicate an erroneous operation result.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Success&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x80&lt;/td&gt;
+      &lt;td&gt;Op code not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x81&lt;/td&gt;
+      &lt;td&gt;Operator not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x82&lt;/td&gt;
+      &lt;td&gt;Operand not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x83&lt;/td&gt;
+      &lt;td&gt;Client Characteristic Configuration Descriptor improperly configured, either notifications or indications must be on&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x84&lt;/td&gt;
+      &lt;td&gt;Invalid operator format&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x85&lt;/td&gt;
+      &lt;td&gt;Invalid operand format&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x86&lt;/td&gt;
+      &lt;td&gt;Abort unsuccessful, sent if request for Abort cannot be completed&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x87&lt;/td&gt;
+      &lt;td&gt;Procedure not completed, sent if unable to complete a procedure for any reason&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x88&lt;/td&gt;
+      &lt;td&gt;Procedure already in progress&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x89&lt;/td&gt;
+      &lt;td&gt;Not found, no results meet the last query criteria&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x9F&lt;/td&gt;
+      &lt;td&gt;Generic/unspecified error&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is a constant value. It defines the revision number of the current service specification. Applications using this service will need to read the revision value in order to establish the particular service protocol supported by the Client.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- External links below --&gt;
+</description>
+        <pubDate>Mon, 04 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/angel-sdk/protocols/preview/HealthJournalService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/angel-sdk/protocols/preview/HealthJournalService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
+      <item>
+        <title>Blood Oxygen Saturation Service</title>
+        <description>&lt;h1 id=&quot;blood-oxygen-saturation-service&quot;&gt;Blood Oxygen Saturation Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;902dcf38-ccc0-4902-b22c-70cab5ee5df2&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Blood Oxygen Saturation&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;blood-oxygen-saturation-measurement-characteristic&quot;&gt;Blood Oxygen Saturation Measurement Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;b269c33f-df6b-4c32-801d-1b963190bc71&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Blood Oxygen Saturation Value&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;FLOAT&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Units: &lt;a href=&quot;https://developer.bluetooth.org/gatt/units/Pages/default.aspx&quot;&gt;percentage&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Time Stamp&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;body-sensor-location-characteristic&quot;&gt;Body Sensor Location Characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;0x2A38&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th&gt;Data format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;8bit&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml&quot;&gt;org.bluetooth.characteristic.body_sensor_location&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. &lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Sun, 03 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/angel-sdk/protocols/preview/BloodOxygenSaturationService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/angel-sdk/protocols/preview/BloodOxygenSaturationService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
+      <item>
+        <title>Alarm Clock Service</title>
+        <description>&lt;h1 id=&quot;alarm-clock-service&quot;&gt;Alarm Clock Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;7cd50edd-8bab-44ff-a8e8-82e19393af10&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Clock Date Time&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Clock Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;date-time-characteristic&quot;&gt;Date Time Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;2A08&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Represents the current Date and Time as reported by the device clock. This characteristic follows the &lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt; specification. &lt;/p&gt;
+
+&lt;h2 id=&quot;alarm-clock-control-point&quot;&gt;Alarm Clock Control Point&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;e4616b0c-22d5-11e4-a7bf-b2227cce2b54&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic allows control access to alarm clock settings. To issue a command, the client writes to the characteristic. A write datagram typically includes an op-code, operator and/or operand. The response data is provided by means of notification from the device to the client (the client must subscribe to notifications in advance).&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operator&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Operand&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-op-codes&quot;&gt;Alarm Clock Control Point Op Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;opcodes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+      &lt;th&gt;Operator&lt;/th&gt;
+      &lt;th&gt;Operand&lt;/th&gt;
+      &lt;th&gt;Response Value&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Report maximum supported alarms&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Report number of alarms defined&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Read alarm&lt;/td&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Add alarm&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Remove alarm&lt;/td&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;Remove all alarms&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;Set Alarm Clock Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Each write to this Control Point shall contain an Op Code and optionally one or both the Operator and the Operand.&lt;/p&gt;
+
+&lt;p&gt;For example, Add Alarm is sent as follows: [Op Code=3] [Operand=date_time]. This operation does not require an operator, so the op code is followed immediately by the operand.&lt;/p&gt;
+
+&lt;p&gt;Modification of any of the defined alarms is not supported. To change an existing alarm, it should be removed and re-added using the new settings.&lt;/p&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-response-format&quot;&gt;Alarm Clock Control Point Response Format&lt;/h3&gt;
+&lt;p&gt;Each response follows the next format:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Response Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#response_codes&quot;&gt;Response Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Response Value&lt;/td&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#response_values&quot;&gt;Response Values&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-response-codes&quot;&gt;Alarm Clock Control Point Response Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;response_codes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Success&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Op Code not supported&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Invalid operator (returned if the Alarm ID is invalid)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Invalid operand (returned if the Date Time format is invalid)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;alarm-clock-control-point-operators-and-response-values&quot;&gt;Alarm Clock Control Point Operators and Response Values&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;response_values&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value Type&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm ID&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Unique identifier of the alarm on the device&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alarm Count&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;The number of alarms matching the requested op code&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date Time&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.date_time.xml&quot;&gt;org.bluetooth.characteristic.date_time&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Note: the next revision of this service is expected to specify alarm notification types, e.g. vibrating motor mode, sound to play, light mode, etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. &lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Sat, 02 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/angel-sdk/protocols/preview/AlarmClockService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/angel-sdk/protocols/preview/AlarmClockService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
+      <item>
+        <title>Activity Monitoring Service</title>
+        <description>&lt;h1 id=&quot;activity-monitoring-service&quot;&gt;Activity Monitoring Service&lt;/h1&gt;
+&lt;p&gt;Service UUID: &lt;code&gt;68b52738-4a04-40e1-8f83-337a29c3284d&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This service provides access to measurements related to physical activity and motion. To obtain these, a fitness tracker typically uses on-board accelerometer and gyroscope sensors.&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristics-summary&quot;&gt;Characteristics Summary&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Characteristic&lt;/th&gt;
+      &lt;th&gt;Read&lt;/th&gt;
+      &lt;th&gt;Write&lt;/th&gt;
+      &lt;th&gt;Notify&lt;/th&gt;
+      &lt;th&gt;Indicate&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Activity Monitoring Feature&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step Count&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Activity Monitoring Control Point&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fall Detection&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;activity-monitoring-feature&quot;&gt;Activity Monitoring Feature&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;2b7c8728-8afb-4be7-b9eb-35156a443b70&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic defines which service features are supported by the current device. This characteristic is a constant value.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Feature Flags&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;16bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Bit mask indicating which activity monitoring features are supported by this device. See &lt;a href=&quot;#feature_flags_bits&quot;&gt;below&lt;/a&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration sampling rate&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Sampling rate for the on-board accelerometer. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gyroscope sampling rate&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Sampling rate for the on-board gyroscope. Units: Hz. Valid values: 1-255. 0 indicates this sensor is not supported.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;feature-flags-bits&quot;&gt;Feature Flags Bits&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;feature_flags_bits&quot;&gt;Feature Flags bit&lt;/a&gt; definitions are listed below. 0 indicates the feature is not supported.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Bit&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Fall Detection&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2-15&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;step-count-characteristic&quot;&gt;Step Count Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;7a543305-6b9e-4878-ad67-29c5a9d99736&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic represents the number of steps taken by the device wearer. The counter may be reset by issuing a relevant op code via the Activity Monitoring Control Point below.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;step_count_characteristic&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Step Count Value&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint24&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;acceleration-energy-magnitude-characteristic&quot;&gt;Acceleration Energy Magnitude Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;9e3bd0d7-bdd8-41fd-af1f-5e99679183ff&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic represents the acceleration energy magnitude registered and accumulated by the tracker over a period of time. The magnitude is calculated as Euclidean norm of the XYZ acceleration components, that is sqrt(X&lt;sup&gt;2&lt;/sup&gt; + Y&lt;sup&gt;2&lt;/sup&gt; + Z&lt;sup&gt;2&lt;/sup&gt;). Summing the above value at discrete intervals (sampling rate) produces the integral of acceleration magnitude over time. This value may be reset by issuing a relevant op code via the &lt;a href=&quot;#activity_monitoring_cp&quot;&gt;Activity Monitoring Control Point&lt;/a&gt; below.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;acceleration_energy_magnitude&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Acceleration Energy Magnitude&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint32&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Units: g (9.8m/s&lt;sup&gt;2&lt;/sup&gt;)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;body-sensor-location-characteristic&quot;&gt;Body Sensor Location Characteristic&lt;/h2&gt;
+&lt;p&gt;Characterisitc UUID: &lt;code&gt;0x2A38&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Body Sensor Location&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml&quot;&gt;org.bluetooth.characteristic.body_sensor_location&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;activity-monitoring-control-point&quot;&gt;Activity Monitoring Control Point&lt;/h2&gt;
+&lt;p&gt;&lt;a name=&quot;activity_monitoring_cp&quot;&gt; &lt;/a&gt;
+Characteristic UUID: &lt;code&gt;d1b446fe-1313-4fce-9ae1-d68ae2d29e60&lt;/code&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Op Code&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;See &lt;a href=&quot;#activity_monitoring_cp_opcodes&quot;&gt;Op Codes&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;activity-monitoring-control-point-op-codes&quot;&gt;Activity Monitoring Control Point Op Codes&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&quot;activity_monitoring_cp_opcodes&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Value&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Reset Step Count: resets the value of &lt;a href=&quot;#step_count_characteristic&quot;&gt;Step Count Value&lt;/a&gt; field to 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Reset Acceleration Energy Magnitude: resets the value of &lt;a href=&quot;#acceleration_energy_magnitude&quot;&gt;Acceleration Energy Magnitude&lt;/a&gt; to 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Acknowledge Fall Detection&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3-255&lt;/td&gt;
+      &lt;td&gt;Reserved&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;fall-detection-characteristic&quot;&gt;Fall Detection Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;72f442a7-6ecd-4851-8858-403f0a7cab73&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic is used to announce fall detection. As soon as fall is detected, the Fall Detection Flag is set and the indication procedure begins. This characterstic is then indicated to the client every second repeatedly until the &lt;em&gt;Acknowledge Fall Detection&lt;/em&gt; op code is received via the &lt;a href=&quot;#activity_monitoring_cp&quot;&gt;Activity Monitoring Control Point&lt;/a&gt;.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fall Detection Flag&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;8bit&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0 - no fall detected, 0xAA - fall detected. Other values are reserved.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Seconds Since Fall Detected&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint16&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;Up-counter indicating the number of seconds elapsed since the last fall detection. The counter is reset when the &lt;em&gt;Acknowledge Fall Detection&lt;/em&gt; op code is received via the &lt;a href=&quot;#activity_monitoring_cp&quot;&gt;Activity Monitoring Control Point&lt;/a&gt;.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;protocol-revision-characteristic&quot;&gt;Protocol Revision Characteristic&lt;/h2&gt;
+&lt;p&gt;Characteristic UUID: &lt;code&gt;3b8e7983-133a-4a0f-90fc-82006ed55505&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This characteristic defines the revision number of the current service specification. Its value is increased whenever this protocol is updated. Ensure the software implementation deals correctly with different revisions of this protocol. This characteristic is a constant value. &lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Field name&lt;/th&gt;
+      &lt;th&gt;Format&lt;/th&gt;
+      &lt;th&gt;Info&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Protocol Revision&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://developer.bluetooth.org/gatt/Pages/FormatTypes.aspx&quot;&gt;uint8&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;0-255&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        <pubDate>Fri, 01 Aug 2014 00:00:00 +0300</pubDate>
+        <link>http://yourdomain.com/angel-sdk/protocols/preview/ActivityMonitoringService.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/angel-sdk/protocols/preview/ActivityMonitoringService.html</guid>
+        
+        
+        <category>services</category>
+        
+      </item>
+    
+  </channel>
+</rss>
