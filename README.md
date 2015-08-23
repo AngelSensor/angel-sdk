@@ -1,15 +1,8 @@
-Angel SDK
-=========
+Angel Sensor SDK
+================
 
-Angel SDK provides access to digital health devices using Bluetooth Low Energy profiles. 
-The SDK is designed for use with Angel health sensor, currently under development by 
-Seraphim Sense Ltd. Angel will allow monitoring of heart rate, blood oxygen, temperature, 
-and activity. Developers will be able to access these health metrics, and other features, 
-in order to create new digital health apps. The SDK is planned for support of Android 
-and iOS devices.
+[Angel Sensor](https://angelsensor.com/) SDK provides access to digital health devices using Bluetooth Low Energy profiles. The SDK is designed for use with Angel health sensor by Seraphim Sense Ltd. Angel enables monitoring heart rate, blood oxygen, temperature, and activity. Developers can access these health metrics, and other features, in order to create new digital health apps. The SDK supports Android and iOS.
 
-More documentation can be found [here](https://seraphimsense.github.io/angel-sdk/).
+More documentation can be found  [here](https://seraphimsense.github.io/angel-sdk/).
 
-Angel SDK is under active development. For details, please refer to [www.angelsensor.com](http://www.angelsensor.com/developers.html). 
-
-
+Angel SDK is under active development. For details, please refer to [www.angelsensor.com](http://www.angelsensor.com/developers.html).
