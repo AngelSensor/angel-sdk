@@ -1,3 +1,5 @@
+![Angel Sensor logo](https://github.com/SeraphimSense/angel-sdk/blob/master/assets/Logo-Black-on-white.png)
+
 Angel Sensor SDK
 ================
 
