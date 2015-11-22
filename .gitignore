@@ -26,3 +26,6 @@ local.properties
 
 # Windows thumbnails
 Thumbs.db
+
+# Gradle
+*.iml
