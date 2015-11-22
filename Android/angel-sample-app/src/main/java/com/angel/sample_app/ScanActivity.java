@@ -79,7 +79,7 @@ public class ScanActivity extends Activity implements OnClickListener {
     BleScanner.ScanCallback mScanCallback = new BleScanner.ScanCallback() {
         @Override
         public void onBluetoothDeviceFound(BluetoothDevice device) {
-            if (device.getName().startsWith("Angel")) {
+            if (device.getName() != null && device.getName().startsWith("Angel")) {
                 ListItem newDevice = new ListItem(device.getName(), device.getAddress(), device);
                 mDeviceListAdapter.add(newDevice);
                 mDeviceListAdapter.addItem(newDevice);
@@ -93,7 +93,6 @@ public class ScanActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
         mControl = (RelativeLayout) findViewById(R.id.control);
         mControl.setOnClickListener(this);

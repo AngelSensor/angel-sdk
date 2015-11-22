@@ -32,7 +32,7 @@
 package com.angel.sample_app;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -45,14 +45,17 @@ import android.widget.TextView;
 import com.angel.sdk.BleCharacteristic;
 import com.angel.sdk.BleDevice;
 import com.angel.sdk.ChAccelerationEnergyMagnitude;
+import com.angel.sdk.ChAccelerationWaveform;
 import com.angel.sdk.ChBatteryLevel;
 import com.angel.sdk.ChHeartRateMeasurement;
+import com.angel.sdk.ChOpticalWaveform;
 import com.angel.sdk.ChStepCount;
 import com.angel.sdk.ChTemperatureMeasurement;
 import com.angel.sdk.SrvActivityMonitoring;
 import com.angel.sdk.SrvBattery;
 import com.angel.sdk.SrvHealthThermometer;
 import com.angel.sdk.SrvHeartRate;
+import com.angel.sdk.SrvWaveformSignal;
 
 import junit.framework.Assert;
 
@@ -62,7 +65,7 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurements);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        orientation = getResources().getConfiguration().orientation;
 
         mHandler = new Handler(this.getMainLooper());
 
@@ -77,6 +80,15 @@ public class HomeActivity extends Activity {
                 mHandler.postDelayed(mPeriodicReader, RSSI_UPDATE_INTERVAL);
             }
         };
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mGreenOpticalWaveformView = (GraphView) findViewById(R.id.graph_green);
+            mGreenOpticalWaveformView.setStrokeColor(0xffffffff);
+            mBlueOpticalWaveformView = (GraphView) findViewById(R.id.graph_blue);
+            mBlueOpticalWaveformView.setStrokeColor(0xffffffff);
+            mAccelerationWaveformView = (GraphView) findViewById(R.id.graph_acceleration);
+            mAccelerationWaveformView.setStrokeColor(0xfff7a300);
+        }
     }
 
     protected void onStart() {
@@ -85,26 +97,56 @@ public class HomeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         assert(extras != null);
         mBleDeviceAddress = extras.getString("ble_device_address");
-        connect(mBleDeviceAddress);
 
-        scheduleUpdaters();
-        displayOnDisconnect();
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            connectGraphs(mBleDeviceAddress);
+        } else {
+            connect(mBleDeviceAddress);
+        }
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        displaySignalStrength(0);
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            displaySignalStrength(0);
+        }
+        unscheduleUpdaters();
         mBleDevice.disconnect();
     }
+
+    private void connectGraphs(String deviceAddress) {
+
+        if (mBleDevice != null) {
+            mBleDevice.disconnect();
+        }
+        mBleDevice = new BleDevice(this, mDeviceGraphLifecycleCallback, mHandler);
+
+        try {
+            mBleDevice.registerServiceClass(SrvWaveformSignal.class);
+
+        } catch (NoSuchMethodException e) {
+            throw new AssertionError();
+        } catch (IllegalAccessException e) {
+            throw new AssertionError();
+        } catch (InstantiationException e) {
+            throw new AssertionError();
+        }
+
+        mBleDevice.connect(deviceAddress);
+
+    }
+
 
     private void connect(String deviceAddress) {
         // A device has been chosen from the list. Create an instance of BleDevice,
         // populate it with interesting services and then connect
 
-        if (mBleDevice == null) {
-            mBleDevice = new BleDevice(this, mDeviceLifecycleCallback, mHandler);
+        if (mBleDevice != null) {
+            mBleDevice.disconnect();
         }
+        mBleDevice = new BleDevice(this, mDeviceLifecycleCallback, mHandler);
 
         try {
             mBleDevice.registerServiceClass(SrvHeartRate.class);
@@ -121,7 +163,30 @@ public class HomeActivity extends Activity {
         }
 
         mBleDevice.connect(deviceAddress);
+
+        scheduleUpdaters();
+        displayOnDisconnect();
     }
+
+    private final BleDevice.LifecycleCallback mDeviceGraphLifecycleCallback = new BleDevice.LifecycleCallback() {
+        @Override
+        public void onBluetoothServicesDiscovered(BleDevice bleDevice) {
+            bleDevice.getService(SrvWaveformSignal.class).getAccelerationWaveform().enableNotifications(mAccelerationWaveformListener);
+            bleDevice.getService(SrvWaveformSignal.class).getOpticalWaveform().enableNotifications(mOpticalWaveformListener);
+        }
+
+        @Override
+        public void onBluetoothDeviceDisconnected() {
+            unscheduleUpdaters();
+            connectGraphs(mBleDeviceAddress);
+        }
+
+        @Override
+        public void onReadRemoteRssi(int i) {
+
+        }
+    };
+
 
     /**
      * Upon Heart Rate Service discovery starts listening to incoming heart rate
@@ -152,6 +217,28 @@ public class HomeActivity extends Activity {
         @Override
         public void onReadRemoteRssi(final int rssi) {
             displaySignalStrength(rssi);
+        }
+    };
+
+    private final BleCharacteristic.ValueReadyCallback<ChAccelerationWaveform.AccelerationWaveformValue> mAccelerationWaveformListener = new BleCharacteristic.ValueReadyCallback<ChAccelerationWaveform.AccelerationWaveformValue>() {
+        @Override
+        public void onValueReady(ChAccelerationWaveform.AccelerationWaveformValue accelerationWaveformValue) {
+            if (accelerationWaveformValue != null && accelerationWaveformValue.wave != null && mAccelerationWaveformView != null)
+                for (Integer item : accelerationWaveformValue.wave) {
+                    mAccelerationWaveformView.addValue(item);
+                }
+
+        }
+    };
+
+    private final BleCharacteristic.ValueReadyCallback<ChOpticalWaveform.OpticalWaveformValue> mOpticalWaveformListener = new BleCharacteristic.ValueReadyCallback<ChOpticalWaveform.OpticalWaveformValue>() {
+        @Override
+        public void onValueReady(ChOpticalWaveform.OpticalWaveformValue opticalWaveformValue) {
+            if (opticalWaveformValue != null && opticalWaveformValue.wave != null)
+                for (ChOpticalWaveform.OpticalSample item : opticalWaveformValue.wave) {
+                    mGreenOpticalWaveformView.addValue(item.green);
+                    mBlueOpticalWaveformView.addValue(item.blue);
+                }
         }
     };
 
@@ -315,6 +402,10 @@ public class HomeActivity extends Activity {
 
     private static final int RSSI_UPDATE_INTERVAL = 1000; // Milliseconds
     private static final int ANIMATION_DURATION = 500; // Milliseconds
+
+    private int orientation;
+
+    private GraphView mAccelerationWaveformView, mBlueOpticalWaveformView, mGreenOpticalWaveformView;
 
     private BleDevice mBleDevice;
     private String mBleDeviceAddress;

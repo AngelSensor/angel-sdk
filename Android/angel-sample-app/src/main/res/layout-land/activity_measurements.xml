@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/ic_home_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.angel.sample_app.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/graph_green"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/view_line_1"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFF"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/view_line_1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.angel.sample_app.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/graph_blue"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/view_line_2"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFF"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/view_line_2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.angel.sample_app.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/graph_acceleration"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/view_line_3"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFF"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/view_line_3" />
+    </RelativeLayout>
+</LinearLayout>
