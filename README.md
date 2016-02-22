@@ -1,12 +1,14 @@
-![Angel Sensor logo](https://github.com/SeraphimSense/angel-sdk/blob/master/assets/Logo-Black-on-white.png)
+![Angel Sensor logo](https://github.com/AngelSensor/angel-sdk/blob/master/assets/Logo-Black-on-white.png)
 
 Angel Sensor SDK
 ================
 
-[Angel Sensor](http://angelsensor.com/) is an open wearable for developers who're building new mobile health products. Angel Sensor tracks heart rate, blood oxygen, skin temperature, steps, sleep quality, calories, acceleration, and orientation. It offers unrestricted, real-time API to its sensors and full control of the data. Angel Sensor SDK, Bluetooth profiles and apps are open source. The SDK supports iOS and Android.
+[Angel Sensor](http://angelsensor.com/) is an open wearable for developers who're building new mobile health products. Angel Sensor tracks heart rate, skin temperature, steps, sleep quality, calories, acceleration, and orientation. It offers unrestricted, real-time API to its sensors and full control of the data. Angel Sensor SDK, Bluetooth profiles and apps are open source. The SDK supports iOS and Android.
 
-Full API reference for Android can be found [here](https://seraphimsense.github.io/angel-sdk/).
+Simply put, Angel Sensor is a wearable component to build stuff with.
 
-BLE profiles and data formats are documented [here](http://seraphimsense.github.io/io/) (under construction).
+Full API reference for Android can be found [here](https://angelsensor.github.io/angel-sdk/).
 
-Angel SDK is under active development. For details, please refer to [www.angelsensor.com/developers](http://www.angelsensor.com/developers/).
+The iOS version is not public yet (under construction), but we'd gladly share it if you're interested. Please send download requests to [while1@angelsensor.com](mailto:while1@angelsensor.com).
+
+Angel Sensor SDK is under active development. For more info, please refer to [www.angelsensor.com/develop](http://www.angelsensor.com/develop/).
