@@ -1,0 +1,114 @@
+/*
+ * Copyright (c) 2016, Seraphim Sense Ltd.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *    and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
+ *    conditions and the following disclaimer in the documentation and/or other materials provided
+ *    with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors may be used to
+ *    endorse or promote products derived from this software without specific prior written
+ *    permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
+ * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+ * TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+"Select Source" = "Select Source";
+
+"Complete" = "Complete";
+
+"Warning" = "Warning";
+
+"Are you sure you want to forget this device?" = "Are you sure you want to forget this device?";
+
+"Amount of alarms exceeds wristband`s limit" = "Amount of alarms exceeds wristband`s limit";
+
+"Are you sure you want to remove this alarm?" = "Are you sure you want to remove this alarm?";
+
+"You have the latest version." = "You have the latest version.";
+
+"You have the latest version." = "You have the latest version.";
+
+"Please keep Angel connected to a power source while updating" = "Please keep Angel connected to a power source while updating";
+
+"Downloading firmware:" = "Downloading firmware:";
+
+"Please check the connection with your Angel" = "Please check the connection with your Angel";
+
+"Connect to device" = "Connect to device";
+
+"Disconnect device" = "Disconnect device";
+
+"Verify bluetooth connect" = "Verify bluetooth connect";
+
+"Check connection to charger" = "Check connection to charger";
+
+"Wait for 20 - 100 seconds until the updates come into force." = "Wait for 20 - 100 seconds until the updates come into force.";
+
+"All progress will be lost. Are you sure?" = "All progress will be lost. Are you sure?";
+
+"Check the connection to the device, and click Continue" = "Check the connection to the device, and click Continue";
+
+"Clearing the staging area." = "Clearing the staging area.";
+
+"Read CRC for code block" = "Read CRC for code block";
+
+"Initiate firmware update" = "Initiate firmware update";
+
+"Update stage read CRC - error" = "Update stage read CRC - error";
+
+"Op Code not supported" = "Op Code not supported";
+
+"Invalid operator. Returned if the Access Key is invalid." = "Invalid operator. Returned if the Access Key is invalid.";
+
+"Invalid CRC. Returned if the CRC-16 signature of the code block is invalid." = "Invalid CRC. Returned if the CRC-16 signature of the code block is invalid.";
+
+"Invalid code block. Returned if the StartAddress, Block Index or block size is invalid." = "Invalid code block. Returned if the StartAddress, Block Index or block size is invalid.";
+
+"Staging area validation failure." = "Staging area validation failure.";
+
+"Power source disconnected." = "Power source disconnected.";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

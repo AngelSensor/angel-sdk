@@ -1,0 +1,39 @@
+//
+//  ANHexRom.h
+//  Angel
+//
+//  Created by Amit Goldhecht on 9/1/14.
+//  Copyright (c) 2014 Bogdan Andresyuk. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface ANHexWrapper : NSObject
+
+@property (readonly) NSInteger pages;
+
+- (instancetype)initWithHexFile:(NSString *)filePath;
+<<<<<<< HEAD
+- (NSData *)blockAtIndex:(UInt16)index;
+
+- (BOOL)validateTotalCRC:(UInt16)crc;
+- (BOOL)validateCRC:(UInt16)crc forBlockAtIndex:(UInt16)blockIndex;
+=======
+- (NSData *)blockAtIndex:(NSInteger)index;// length:(int *)length;
+
+- (BOOL)validateTotalCRC:(UInt16)crc;
+- (BOOL)validateCRC:(UInt16)crc forBlockAtIndex:(NSInteger)blockIndex;
+>>>>>>> bogdan
+
+@end
+
+@interface ANBlock : NSObject
+
+@property (nonatomic, readonly) UInt16 index;
+@property (nonatomic, readonly) UInt32 startAddress;
+@property (nonatomic, readonly) NSData *data;
+@property (nonatomic, readonly) UInt16 CRC;
+
+- (instancetype)initWithIndex:(UInt16)index address:(UInt32)address data:(NSData *)data;
+- (NSData *)getBlock;
+@end

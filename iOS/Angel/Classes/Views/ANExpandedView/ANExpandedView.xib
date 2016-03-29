@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ANExpandedView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="496"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="uDU-CY-CkS" userLabel="Background">
+                    <rect key="frame" x="0.0" y="45" width="315" height="426"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.28627450980392155" green="0.3411764705882353" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="3bP-oW-rfv" userLabel="Header View">
+                    <rect key="frame" x="0.0" y="0.0" width="315" height="95"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZOp-LX-Cnc" userLabel="Title Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="10" y="12" width="135" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_steps" id="lgP-y4-yV7">
+                            <rect key="frame" x="145" y="16" width="12" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="QTP-vw-6Dv" userLabel="Steps Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="162" y="12" width="68" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_energy" id="TCI-hU-Diy">
+                            <rect key="frame" x="230" y="17" width="10" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="CLG-RY-MUF" userLabel="Energy Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="243" y="12" width="64" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_heart" id="WqN-aa-LwO">
+                            <rect key="frame" x="0.0" y="55" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MeY-G2-YiU" userLabel="Heart Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="28" y="55" width="55" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.31372549019607843" green="0.5490196078431373" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_oxygen" id="Q6y-du-wh6">
+                            <rect key="frame" x="79" y="55" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ah2-Bl-Qes" userLabel="Oxygen Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="107" y="55" width="55" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.80000000000000004" green="0.0" blue="0.015686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_temp" id="ouR-wi-SKY">
+                            <rect key="frame" x="160" y="55" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ce3-oX-PRJ" userLabel="Temperature Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="188" y="55" width="55" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.96862745098039216" green="0.63921568627450975" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_small_running" id="0N6-bJ-7V1">
+                            <rect key="frame" x="242" y="55" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="1Re-T2-UPZ" userLabel="Other Label" customClass="ANAsapLabel">
+                            <rect key="frame" x="270" y="55" width="45" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.45490196078431372" green="0.80784313725490198" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="vZg-5D-EY8" customClass="ANGraphContainerView">
+                    <rect key="frame" x="0.0" y="95" width="315" height="401"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="bx4-AY-Mu4" userLabel="Selection View">
+                            <rect key="frame" x="36" y="30" width="1" height="330"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Hwp-oy-7da">
+                            <rect key="frame" x="0.0" y="0.0" width="315" height="376"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="jgT-wZ-SLX" userLabel="Header View">
+                                    <rect key="frame" x="0.0" y="0.0" width="640" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" id="lgs-TC-Hqx" userLabel="Container View">
+                                    <rect key="frame" x="0.0" y="20" width="640" height="355"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="delegate" destination="vZg-5D-EY8" id="2yi-M4-5Sd"/>
+                            </connections>
+                        </scrollView>
+                        <view contentMode="scaleToFill" id="Ii4-Tn-iRS" userLabel="Slider View" customClass="ANSliderView">
+                            <rect key="frame" x="0.0" y="350" width="315" height="46"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_selection" id="rWb-qn-Pcg">
+                                    <rect key="frame" x="22" y="10" width="29" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="slideItemView" destination="rWb-qn-Pcg" id="yV7-nM-Wp9"/>
+                            </connections>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2LD-Kq-ThW" userLabel="Bubble" customClass="ANAsapBoldButton">
+                            <rect key="frame" x="-5" y="-5" width="84" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="3"/>
+                            <state key="normal" backgroundImage="icon_hour_bubble">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="containerView" destination="lgs-TC-Hqx" id="14S-9U-sui"/>
+                        <outlet property="headerView" destination="jgT-wZ-SLX" id="DDZ-PD-vYE"/>
+                        <outlet property="scrollView" destination="Hwp-oy-7da" id="r7h-2p-epL"/>
+                        <outlet property="selectionTime" destination="2LD-Kq-ThW" id="HbO-fs-8OR"/>
+                        <outlet property="selectionView" destination="bx4-AY-Mu4" id="Ihq-ff-1Ta"/>
+                        <outlet property="sliderView" destination="Ii4-Tn-iRS" id="ub3-IY-iJO"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="energyLabel" destination="CLG-RY-MUF" id="NDq-Ub-FZ6"/>
+                <outlet property="graphContainerView" destination="vZg-5D-EY8" id="gr6-nt-I8G"/>
+                <outlet property="headerView" destination="3bP-oW-rfv" id="Ij9-NJ-hOy"/>
+                <outlet property="heartLabel" destination="MeY-G2-YiU" id="NMd-Ce-4ud"/>
+                <outlet property="otherLabel" destination="1Re-T2-UPZ" id="VDL-pB-xBX"/>
+                <outlet property="oxygenLabel" destination="ah2-Bl-Qes" id="Nei-Dd-VAC"/>
+                <outlet property="stepsLabel" destination="QTP-vw-6Dv" id="1sb-aZ-UPr"/>
+                <outlet property="temperatureLabel" destination="ce3-oX-PRJ" id="zPs-5S-2fe"/>
+                <outlet property="titleLabel" destination="ZOp-LX-Cnc" id="AdY-L6-ATR"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_hour_bubble" width="83" height="41"/>
+        <image name="icon_selection" width="28" height="28"/>
+        <image name="icon_small_energy" width="10" height="14"/>
+        <image name="icon_small_heart" width="27" height="27"/>
+        <image name="icon_small_oxygen" width="27" height="27"/>
+        <image name="icon_small_running" width="27" height="27"/>
+        <image name="icon_small_steps" width="11" height="16"/>
+        <image name="icon_small_temp" width="27" height="27"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
