@@ -57,6 +57,7 @@
 		28E1514D19A5FA9D00D5408B /* ANFirmwareUpdateFeatureCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1514C19A5FA9D00D5408B /* ANFirmwareUpdateFeatureCharacteristic.m */; };
 		28E1515019A5FAC300D5408B /* ANFirmwareUpdateConrolPointCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1514F19A5FAC300D5408B /* ANFirmwareUpdateConrolPointCharacteristic.m */; };
 		799CC6611CAB29170037A8EA /* AppDependencies.m in Sources */ = {isa = PBXBuildFile; fileRef = 799CC6601CAB29170037A8EA /* AppDependencies.m */; };
+		79E3154F1CAB404B000B4020 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E3154E1CAB404B000B4020 /* libsqlite3.0.tbd */; };
 		CEA9B2F01C83824800A71443 /* ANUpdateFirmwareLogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA9B2EF1C83824800A71443 /* ANUpdateFirmwareLogCell.m */; };
 		CEAA86BB1C992DFE006E4456 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAA86B81C992DFE006E4456 /* Default-568h@2x.png */; };
 		CEAA86BC1C992DFE006E4456 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEAA86BA1C992DFE006E4456 /* Localized.strings */; };
@@ -283,6 +284,7 @@
 		28E1514F19A5FAC300D5408B /* ANFirmwareUpdateConrolPointCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANFirmwareUpdateConrolPointCharacteristic.m; path = ../../Angel/Classes/FirmwareUpdate/ANFirmwareUpdateConrolPointCharacteristic.m; sourceTree = "<group>"; };
 		799CC65F1CAB29170037A8EA /* AppDependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDependencies.h; path = AppDependencies/AppDependencies.h; sourceTree = "<group>"; };
 		799CC6601CAB29170037A8EA /* AppDependencies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDependencies.m; path = AppDependencies/AppDependencies.m; sourceTree = "<group>"; };
+		79E3154E1CAB404B000B4020 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		C077FD67768CB78670995DB3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CEA9B2EE1C83824800A71443 /* ANUpdateFirmwareLogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANUpdateFirmwareLogCell.h; sourceTree = "<group>"; };
 		CEA9B2EF1C83824800A71443 /* ANUpdateFirmwareLogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANUpdateFirmwareLogCell.m; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E3154F1CAB404B000B4020 /* libsqlite3.0.tbd in Frameworks */,
 				F7979ACB19652C7600529E27 /* CoreGraphics.framework in Frameworks */,
 				F7979ACD19652C7600529E27 /* UIKit.framework in Frameworks */,
 				F7979AC919652C7600529E27 /* Foundation.framework in Frameworks */,
@@ -1403,6 +1406,7 @@
 		F7979AC719652C7600529E27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79E3154E1CAB404B000B4020 /* libsqlite3.0.tbd */,
 				F7979AC819652C7600529E27 /* Foundation.framework */,
 				F7979ACA19652C7600529E27 /* CoreGraphics.framework */,
 				F7979ACC19652C7600529E27 /* UIKit.framework */,
