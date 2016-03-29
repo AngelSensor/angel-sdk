@@ -73,7 +73,7 @@
         if (!_databaseQueue) {
             _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:[self filePath:DATABASE_NAME]];
             [_databaseQueue inDatabase:^(FMDatabase *db) {
-                #warning remove on prod
+//                #warning remove on prod
 //                [db executeUpdate:@"DROP TABLE records"];
                 [db executeUpdate:@"CREATE TABLE IF NOT EXISTS records (id INTEGER NOT NULL, type INTEGER NOT NULL, value NUMERIC(25), timestamp NUMERIC(13) NOT NULL, date NUMERIC(13) NOT NULL, PRIMARY KEY (id))"];
                 [db executeUpdate:@"CREATE UNIQUE INDEX IF NOT EXISTS columns ON records (type, timestamp, date)"];

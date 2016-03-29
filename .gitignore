@@ -29,3 +29,7 @@ Thumbs.db
 
 # Gradle
 *.iml
+
+# Xcode
+xcuserdata/
+xcshareddata/
